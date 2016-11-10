@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BCE025B6-3CA2-4685-895F-AADAAFA95685}</ProjectGuid>
+    <ProjectGuid>{15AFA6E3-E9E6-43C2-A72D-4B9530C145FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Task2.Tests</RootNamespace>
-    <AssemblyName>Task2.Tests</AssemblyName>
+    <RootNamespace>Task2_2</RootNamespace>
+    <AssemblyName>Task2_2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>C:\Users\Masha\AppData\Local\JetBrains\Installations\ReSharperPlatformVs10\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,17 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NonRectangularArrayTests.cs" />
+    <Compile Include="NonRectangularArray.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Task2\Task2.csproj">
       <Project>{d69acb21-9ce7-453b-a1ac-5660a5cb9b06}</Project>
       <Name>Task2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Task2_2\Task2_2.csproj">
-      <Project>{15afa6e3-e9e6-43c2-a72d-4b9530c145fb}</Project>
-      <Name>Task2_2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

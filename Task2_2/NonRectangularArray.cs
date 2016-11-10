@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using Task2;
 
-namespace Task2
+namespace Task2_2
 {
-    public delegate int ComparerDelegate(int[] array1, int[] array2);
-
     public class NonRectangularArray
     {
+        /// <summary>
+        /// Sorts a non rectangular array in a specified order.
+        /// </summary>
+        /// <param name="array">An array for handling.</param>
+        /// <param name="iComparer">An interface for sorting.</param>
+        public static void BubbleSort(int[][] array, IComparer<int[]> iComparer)
+        {
+            BubbleSort(array, iComparer.Compare);
+        }
+
         /// <summary>
         /// Sorts a non rectangular array in a specified order.
         /// </summary>
@@ -15,7 +24,7 @@ namespace Task2
         /// <param name="array">An array for handling.</param>
         /// <param name="comparerDelegate">A method for sorting.</param>
         /// <returns>Returns a new sorted array.</returns>
-        public static void BubbleSort(int[][] array, ComparerDelegate comparerDelegate)
+        private static void BubbleSort(int[][] array, ComparerDelegate comparerDelegate)
         {
             if (array == null)
                 throw new ArgumentNullException("Null data!");
