@@ -31,7 +31,7 @@ namespace Task2.Tests
     [TestFixture]
     public class NonRectangularArrayTests
     {
-        private ComparerDelegate _comparerDelegate;
+        private Comparison<int[]> comparison;
 
         private static readonly RowsSumIncrease RowsSumIncrease = new RowsSumIncrease();
         private static readonly RowsSumDecrease RowsSumDecrease = new RowsSumDecrease();
@@ -87,8 +87,8 @@ namespace Task2.Tests
         [Test, TestCaseSource(typeof(BubbleSort1TestClass), nameof(BubbleSort1TestClass.TestCases))]
         public void BubbleSort1Tests(int[][] array, int[][] expected, IComparer<int[]> iComparer)
         {
-            _comparerDelegate = iComparer.Compare;
-            BubbleSort(array, _comparerDelegate);
+            comparison = iComparer.Compare;
+            BubbleSort(array, comparison);
             Assert.AreEqual(array, expected);
         }
 

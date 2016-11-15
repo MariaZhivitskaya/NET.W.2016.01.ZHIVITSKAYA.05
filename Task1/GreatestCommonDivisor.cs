@@ -5,181 +5,167 @@ namespace Task1
 {
     public class GreatestCommonDivisor
     {
-        private static readonly Stopwatch StopWatch = new Stopwatch();
+        private static Func<int, int, int> _funcTwoParams;
 
-        private delegate int DelegateTwoParamsGCD(int a, int b);
-
-        private delegate int DelegateThreeParamsGCD(int a, int b, int c);
+        private static Func<int, int, int, int> _funcThreeParams;
 
         /// <summary>
-        /// Finds a greatest common divisor
+        /// Finds the greatest common divisor
         /// of 2 numbers according to Euclidean method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <returns>Returns a GCD.</returns>
-        public static int EuclideanGCD(int a, int b)
-        {
-            return EuclideanGCDLogic(a, b);
-        }
+        /// <returns>Returns the GCD.</returns>
+        public static int EuclideanGCD(int a, int b) => EuclideanGCDLogic(a, b);
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 2 numbers according to Euclidean method calculating an elapsed time;
+        /// Finds the greatest common divisor
+        /// of 2 numbers according to Euclidean method calculating the elapsed time;
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int EuclideanGCD(int a, int b, out long elapsedTime)
         {
-            DelegateTwoParamsGCD delGCD = EuclideanGCD;
-            return GCDLogic(delGCD, a, b, out elapsedTime);
+            _funcTwoParams = EuclideanGCD;
+            return GCDLogic(a, b, out elapsedTime);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
+        /// Finds the greatest common divisor
         /// of 3 numbers according to Euclidean method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
         /// <param name="c">The third number.</param>
-        /// <returns>Returns a GCD.</returns>
-        public static int EuclideanGCD(int a, int b, int c)
-        {
-            int divisor = EuclideanGCD(a, b);
-            return EuclideanGCD(divisor, c);
-        }
+        /// <returns>Returns the GCD.</returns>
+        public static int EuclideanGCD(int a, int b, int c) => 
+            EuclideanGCD(EuclideanGCD(a, b), c);
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 3 numbers according to Euclidean method calculating an elapsed time.
+        /// Finds the greatest common divisor
+        /// of 3 numbers according to Euclidean method calculating the elapsed time.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
         /// <param name="c">The third number.</param>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int EuclideanGCD(int a, int b, int c, out long elapsedTime)
         {
-            DelegateThreeParamsGCD delGCD = EuclideanGCD;
-            return GCDLogic(delGCD, a, b, c, out elapsedTime);
+            _funcThreeParams = EuclideanGCD;
+            return GCDLogic(a, b, c, out elapsedTime);
         }
         
         /// <summary>
-        /// Finds a greatest common divisor
+        /// Finds the greatest common divisor
         /// of a various number of elements according to Euclidean method.
         /// </summary>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int EuclideanGCD(params int[] data)
         {
-            DelegateTwoParamsGCD delGCD = EuclideanGCD;
-            return GCDLogic(delGCD, data);
+            _funcTwoParams = EuclideanGCD;
+            return GCDLogic(data);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
+        /// Finds the greatest common divisor
         /// of a various number of elements according to Euclidean method
-        /// calculating an elapsed time.
+        /// calculating the elapsed time.
         /// </summary>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int EuclideanGCD(out long elapsedTime, params int[] data)
         {
-            DelegateTwoParamsGCD delGCD = EuclideanGCD;
-            return GCDLogic(delGCD, out elapsedTime, data);
+            _funcTwoParams = EuclideanGCD;
+            return GCDLogic(out elapsedTime, data);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 2 numbers according to a binary Euclidean method.
+        /// Finds the greatest common divisor
+        /// of 2 numbers according to the binary Euclidean method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <returns>Returns a GCD.</returns>
-        public static int BinaryGCD(int a, int b)
-        {
-            return BinaryGCDLogic(a, b);
-        }
+        /// <returns>Returns the GCD.</returns>
+        public static int BinaryGCD(int a, int b) => BinaryGCDLogic(a, b);
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 2 numbers according to a binary Euclidean method
-        /// calculating an elapsed time.
+        /// Finds the greatest common divisor
+        /// of 2 numbers according to the binary Euclidean method
+        /// calculating the elapsed time.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int BinaryGCD(int a, int b, out long elapsedTime)
         {
-            DelegateTwoParamsGCD delGCD = BinaryGCD;
-            return GCDLogic(delGCD, a, b, out elapsedTime);
+            _funcTwoParams = BinaryGCD;
+            return GCDLogic(a, b, out elapsedTime);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 3 numbers according to a binary Euclidean method.
+        /// Finds the greatest common divisor
+        /// of 3 numbers according to the binary Euclidean method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
         /// <param name="c">The third number.</param>
-        /// <returns>Returns a GCD.</returns>
-        public static int BinaryGCD(int a, int b, int c)
-        {
-            int divisor = BinaryGCD(a, b);
-            return EuclideanGCD(divisor, c);
-        }
+        /// <returns>Returns the GCD.</returns>
+        public static int BinaryGCD(int a, int b, int c) => 
+            EuclideanGCD(BinaryGCD(a, b), c);
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of 3 numbers according to a binary Euclidean method
-        /// calculating an elapsed time.
+        /// Finds the greatest common divisor
+        /// of 3 numbers according to the binary Euclidean method
+        /// calculating the elapsed time.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
         /// <param name="c">The third number.</param>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int BinaryGCD(int a, int b, int c, out long elapsedTime)
         {
-            DelegateThreeParamsGCD delGCD = BinaryGCD;
-            return GCDLogic(delGCD, a, b, c, out elapsedTime);
+            _funcThreeParams = BinaryGCD;
+            return GCDLogic(a, b, c, out elapsedTime);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of a various number of elements according to a binary Euclidean method.
+        /// Finds the greatest common divisor
+        /// of a various number of elements according to the binary Euclidean method.
         /// </summary>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int BinaryGCD(params int[] data)
         {
-            DelegateTwoParamsGCD delGCD = BinaryGCD;
-            return GCDLogic(delGCD, data);
+            _funcTwoParams = BinaryGCD;
+            return GCDLogic(data);
         }
 
         /// <summary>
-        /// Finds a greatest common divisor
-        /// of a various number of elements according to a binary Euclidean method.
+        /// Finds the greatest common divisor
+        /// of a various number of elements according to the binary Euclidean method.
         /// </summary>
-        /// <param name="elapsedTime">An elapsed time.</param>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <param name="elapsedTime">The elapsed time.</param>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
         public static int BinaryGCD(out long elapsedTime, params int[] data)
         {
-            DelegateTwoParamsGCD delGCD = BinaryGCD;
-            return GCDLogic(delGCD, out elapsedTime, data);
+            _funcTwoParams = BinaryGCD;
+            return GCDLogic(out elapsedTime, data);
         }
 
         /// <summary>
-        /// Implements a logic of Euclidean GCD method.
+        /// Implements the logic of Euclidean GCD method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <returns>Returns a GCD.</returns>
+        /// <returns>Returns the GCD.</returns>
         private static int EuclideanGCDLogic(int a, int b)
         {
             a = Math.Abs(a);
@@ -195,11 +181,11 @@ namespace Task1
         }
 
         /// <summary>
-        /// Implements a logic of a binary Euclidean GCD method.
+        /// Implements the logic of a binary Euclidean GCD method.
         /// </summary>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <returns>>Returns a GCD.</returns>
+        /// <returns>>Returns the GCD.</returns>
         private static int BinaryGCDLogic(int a, int b)
         {
             a = Math.Abs(a);
@@ -231,57 +217,58 @@ namespace Task1
         }
 
         /// <summary>
-        /// Finds a GCD according to a specified method.
+        /// Finds the GCD according to a specified method.
         /// </summary>
-        /// <param name="delGDC">A method.</param>
+        /// <param name="delGDC">The method.</param>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
-        /// <param name="time">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
-        private static int GCDLogic(DelegateTwoParamsGCD delGDC, int a, int b,
+        /// <param name="time">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
+        private static int GCDLogic(int a, int b,
             out long time)
         {
-            StopWatch.Start();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
 
-            int result = delGDC(a, b);
+            int result = _funcTwoParams(a, b);
 
-            StopWatch.Stop();
-            time = StopWatch.ElapsedMilliseconds;
+            stopWatch.Stop();
+            time = stopWatch.ElapsedMilliseconds;
 
             return result;
         }
 
         /// <summary>
-        /// Finds a GCD according to a specified method.
+        /// Finds the GCD according to a specified method.
         /// </summary>
-        /// <param name="delGDC">A method.</param>
+        /// <param name="delGDC">The method.</param>
         /// <param name="a">The first number.</param>
         /// <param name="b">The second number.</param>
         /// <param name="c">The third number.</param>
-        /// <param name="time">An elapsed time.</param>
-        /// <returns>Returns a GCD.</returns>
-        private static int GCDLogic(DelegateThreeParamsGCD delGDC, int a, int b, int c,
+        /// <param name="time">The elapsed time.</param>
+        /// <returns>Returns the GCD.</returns>
+        private static int GCDLogic(int a, int b, int c,
             out long time)
         {
-            StopWatch.Start();
+            var stopWatch = new Stopwatch();
 
-            int result = delGDC(a, b, c);
+            int result = _funcThreeParams(a, b, c);
 
-            StopWatch.Stop();
-            time = StopWatch.ElapsedMilliseconds;
+            stopWatch.Stop();
+            time = stopWatch.ElapsedMilliseconds;
 
             return result;
         }
 
         /// <summary>
-        /// Finds a GCD according to a specified method.
+        /// Finds the GCD according to a specified method.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if data is null.</exception>
         /// <exception cref="ArgumentException">Thrown if there are no parameters.</exception>
-        /// <param name="delGCD">A method.</param>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
-        private static int GCDLogic(DelegateTwoParamsGCD delGCD, params int[] data)
+        /// <param name="delGCD">The method.</param>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
+        private static int GCDLogic(params int[] data)
         {
             if (data == null)
                 throw new ArgumentNullException("Null data!");
@@ -289,30 +276,29 @@ namespace Task1
             if (data.Length < 2)
                 throw new ArgumentException("Wrong number of parameters!");
 
-            int divisor = delGCD(data[0], data[1]);
+            int divisor = _funcTwoParams(data[0], data[1]);
 
             for (int i = 2; i < data.Length; i++)
-                divisor = delGCD(data[i], divisor);
+                divisor = _funcTwoParams(data[i], divisor);
 
             return divisor;
         }
 
         /// <summary>
-        /// Finds a GCD according to a specified method.
+        /// Finds the GCD according to a specified method.
         /// </summary>
-        /// <param name="delGCD">A method.</param>
-        /// <param name="time">An elapsed time.</param>
-        /// <param name="data">Elements for calculating a GCD.</param>
-        /// <returns>Returns a GCD.</returns>
-        private static int GCDLogic(DelegateTwoParamsGCD delGCD, 
-            out long time, params int[] data)
+        /// <param name="delGCD">The method.</param>
+        /// <param name="time">The elapsed time.</param>
+        /// <param name="data">Elements for calculating the GCD.</param>
+        /// <returns>Returns the GCD.</returns>
+        private static int GCDLogic(out long time, params int[] data)
         {
-            StopWatch.Start();
+            var stopWatch = new Stopwatch();
 
-            int result = GCDLogic(delGCD, data);
+            int result = GCDLogic(data);
 
-            StopWatch.Stop();
-            time = StopWatch.ElapsedMilliseconds;
+            stopWatch.Stop();
+            time = stopWatch.ElapsedMilliseconds;
 
             return result;
         }
